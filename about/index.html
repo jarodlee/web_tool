@@ -7,9 +7,9 @@
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="theme-color" content="#f9f9f9" />
-    <title>在线工具网</title>
+    <title>高花亭小学在线工具网</title>
     <link rel="shortcut icon" href="../assets/images/favicon.png" />
-    <meta name="keywords" content="在线工具网" />
+    <meta name="keywords" content="高花亭小学在线工具网" />
     <meta name="description" content="在线网址导航, 各类开发工具、绘图绘画工具、md5、在线ps、base64、房贷计算器等" />
 
     <link rel="stylesheet" id="block-library-css"
@@ -28,10 +28,93 @@
     <script type="text/javascript" src="./assets/js/jquery.min-3.2.1.js" id="jquery-js"></script>
     <script type="text/javascript" src="./assets/js/content-search.js"  id="content-search-js"></script>
 
+    <!-- 新增：更漂亮的中文字体与基础动画样式 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700&family=ZCOOL+QingKe+HuangYou&display=swap" rel="stylesheet">
+    <style>
+      :root{
+        --accent:#2b8cff;
+        --muted:#6b7280;
+        --card-bg: rgba(255,255,255,0.85);
+        --glass: rgba(255,255,255,0.6);
+      }
 
+      html,body{height:100%;}
+      body{
+        font-family: "Noto Sans SC", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+        background: linear-gradient(180deg,#f6fbff 0%, #f3f7fb 40%, #eef5ff 100%);
+        -webkit-font-smoothing:antialiased;
+        color:#222;
+      }
 
+      /* Hero */
+      .hero{
+        margin-top:30px;
+        padding:36px;
+        border-radius:12px;
+        background: linear-gradient(135deg, rgba(43,140,255,0.12), rgba(43,140,255,0.02));
+        box-shadow: 0 8px 30px rgba(43,140,255,0.08);
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        gap:20px;
+        overflow:hidden;
+      }
+      .hero::before{
+        content:"";
+        position:absolute;
+        left:-120px; top:-40px;
+        width:320px; height:320px;
+        background: radial-gradient(circle at 30% 30%, rgba(43,140,255,0.12), transparent 40%);
+        transform: rotate(15deg);
+      }
+      .hero-inner{position:relative;z-index:2;max-width:900px;}
+      .hero h1{
+        font-family: "ZCOOL QingKe HuangYou", "Noto Sans SC", serif;
+        font-size:2rem;
+        margin:0 0 8px;
+        letter-spacing:0.6px;
+        color: #0b3a66;
+        transform: translateY(0);
+      }
+      .lead{
+        color:var(--muted);
+        font-size:1.05rem;
+        margin-bottom:12px;
+      }
+      .hero-cta .btn{
+        background: linear-gradient(90deg,var(--accent), #1ea0ff);
+        border:none;
+        color:#fff;
+        padding:10px 18px;
+        border-radius:8px;
+        box-shadow:0 6px 20px rgba(43,140,255,0.18);
+      }
 
-     <script>
+      /* 卡片内容 */
+      .content.card{
+        margin-top:22px;
+        background: var(--card-bg);
+        border-radius:12px;
+        box-shadow: 0 10px 30px rgba(16,24,40,0.06);
+        border: 1px solid rgba(16,24,40,0.04);
+        overflow:hidden;
+      }
+      .card-body{padding:28px;}
+      .content h2{margin-top:0;color:#123a5e;font-weight:700;}
+      .content p{line-height:1.8;color:#333;font-size:1.05rem}
+
+      /* 小的动效：渐入 + 上浮 */
+      .reveal{opacity:0; transform: translateY(18px); transition: all 600ms cubic-bezier(.2,.9,.2,1); will-change:transform,opacity;}
+      .reveal.in-view{opacity:1; transform: translateY(0);}
+
+      /* 响应式 */
+      @media (max-width:768px){
+        .hero{flex-direction:column; text-align:left;}
+        .hero h1{font-size:1.5rem;}
+      }
+    </style>
+    
+    <script>
         !function(p){"use strict";!function(t){var s=window,e=document,i=p,c="".concat("https:"===e.location.protocol?"https://":"http://","sdk.51.la/js-sdk-pro.min.js"),n=e.createElement("script"),r=e.getElementsByTagName("script")[0];n.type="text/javascript",n.setAttribute("charset","UTF-8"),n.async=!0,n.src=c,n.id="LA_COLLECT",i.d=n;var o=function(){s.LA.ids.push(i)};s.LA?s.LA.ids&&o():(s.LA=p,s.LA.ids=[],o()),r.parentNode.insertBefore(n,r)}()}({id:"3G9QRCtAm0z4ABfe",ck:"3G9QRCtAm0z4ABfe"});
     </script>
 
