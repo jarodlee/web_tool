@@ -292,7 +292,28 @@
                                     }
                                 }
                             </script>
-                            <script src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script>
+                            <!-- 简单天气 Widget 示例 -->
+<div id="simple-weather"></div>
+<script>
+  (function(){
+    const city = 'AnQing, CN';   // 城市，修改为你需要的
+    const unit = 'metric';         // 摄氏度
+    const lang = 'zh';             // 中文
+    const script = document.createElement('script');
+    script.src = 'https://weatherwidget.io/js/widget.min.js';
+    script.onload = () => {
+      window.WIDGET = window.WIDGET || [];
+      window.WIDGET.push({
+        location: city,
+        units: unit,
+        language: lang,
+        containerId: 'simple-weather'
+      });
+    };
+    document.getElementById('simple-weather').appendChild(script);
+  })();
+</script>
+
                         </div>
 
                     </div>
