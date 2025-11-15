@@ -21,9 +21,7 @@ https://ghtxx.cn/
 
 ## 参考资料
 
-- https://web-tool-omega.vercel.app/
-
-- https://web-a55.pages.dev/
+感谢互联网的开源大神们为我们提供的从代码到服务的所有功能。
 
 - https://web.gitapp.cn/
 
