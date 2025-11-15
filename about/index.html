@@ -1,189 +1,100 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#f9f9f9" />
-  <title>高花亭小学在线工具网</title>
-  <link rel="shortcut icon" href="../assets/images/favicon.png" />
-  <meta name="keywords" content="高花亭小学,在线工具,教学服务,校园平台" />
-  <meta name="description" content="高花亭小学在线工具网：为全校师生提供智能化教学、家校沟通与校园服务。" />
-
-  <!-- 样式 -->
-  <link rel="stylesheet" href="./assets/css/bootstrap.min-4.3.1.css" />
-  <link rel="stylesheet" href="./assets/fontawesome-5.15.4/css/all.min.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700&family=ZCOOL+QingKe+HuangYou&display=swap" rel="stylesheet">
-
-  <style>
-    :root {
-      --accent: #2b8cff;
-      --muted: #6b7280;
-      --card-bg: rgba(255, 255, 255, 0.9);
-      --dark-bg: #0d1117;
-      --dark-text: #e5e7eb;
-    }
-
-    html, body {
-      height: 100%;
-      font-family: "Noto Sans SC", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
-      background: linear-gradient(180deg, #f6fbff 0%, #f3f7fb 40%, #eef5ff 100%);
-      color: #222;
-      margin: 0;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    body.io-black-mode {
-      background: var(--dark-bg);
-      color: var(--dark-text);
-    }
-
-    .container {
-      max-width: 900px;
-      margin: 60px auto;
-      background: var(--card-bg);
-      border-radius: 16px;
-      padding: 40px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-    }
-
-    h1, h2, h3, h4 {
-      font-family: "ZCOOL QingKe HuangYou", "Noto Sans SC", serif;
-      color: #0b3a66;
-      margin-bottom: 18px;
-    }
-
-    h1 { font-size: 2.2rem; }
-    h4 { font-size: 1.2rem; margin-top: 40px; }
-
-    p {
-      line-height: 1.9;
-      font-size: 1.1rem;
-      margin-bottom: 1.2rem;
-      text-align: justify;
-    }
-
-    ul {
-      line-height: 2;
-      font-size: 1rem;
-      padding-left: 18px;
-    }
-
-    footer {
-      text-align: center;
-      margin-top: 60px;
-      padding: 20px;
-      font-size: 0.9rem;
-      color: var(--muted);
-    }
-
-    footer a {
-      color: var(--accent);
-      text-decoration: none;
-    }
-
-    .switch-dark-mode {
-      position: fixed;
-      right: 20px;
-      bottom: 20px;
-      background: var(--accent);
-      color: #fff;
-      border-radius: 50%;
-      width: 46px;
-      height: 46px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 14px rgba(43,140,255,0.25);
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .switch-dark-mode:hover {
-      transform: scale(1.1);
-    }
-
-    body.io-black-mode .container {
-      background: rgba(255,255,255,0.06);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    }
-
-    body.io-black-mode h1,
-    body.io-black-mode h4 {
-      color: #90c2ff;
-    }
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>高花亭小学网络学伴</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: "Helvetica", "Arial", sans-serif;
+            background: #f5f5f5;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            padding: 20px 0;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        .login-box {
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            margin-top: 20px;
+        }
+        .about {
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            margin-top: 20px;
+            line-height: 1.7;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        img.qr {
+            width: 180px;
+            display: block;
+            margin: 15px auto;
+        }
+        a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        a:hover { text-decoration: underline; }
+    </style>
 </head>
-
 <body>
-  <main>
     <div class="container">
-      <h1>关于作者</h1>
+        <header>
+            <h1>高花亭小学网络学伴</h1>
+        </header>
 
-      <p>大家好，欢迎来到 <strong>高花亭小学网络学伴</strong>，我叫小花，能够熟练使用 MySQL、Oracle 等数据库管理系统。</p>
+        <div class="login-box">
+            <h2 style="font-size: 1.2rem; margin-top:0;">邮箱登录</h2>
+            <script src="https://exmail.qq.com/zh_CN/htmledition/js_biz/outerlogin.js" charset="gb18030"></script>
+            <script>writeLoginPanel({domainlist:"ghtxx.cn", mode:"horizontal"});</script>
+        </div>
 
-      <p>在工作中，我注重团队协作，善于沟通合作，也注重代码的可读性与可维护性，致力于编写高质量的程序。对新技术充满热情，并能将所学知识融入实际工作。</p>
+        <div class="about">
+            <h2 style="margin-top:0; font-size:1.2rem;">关于作者</h2>
+            <p>大家好，欢迎来到 <strong>高花亭小学网络学伴</strong>，我叫<strong>小花</strong>，能够熟练使用 MySQL、Oracle 等数据库管理系统。</p>
+            <p>在工作中，我注重团队协作，善于沟通合作，也注重代码的可读性与可维护性，致力于编写高质量的程序。对新技术充满热情，并能将所学知识融入实际工作。</p>
+            <p>除学习与教学外，我积极参与各类技术交流与社区活动，不断提升自己的技术能力与解决问题的思维方式。</p>
+            <p>本平台由我校在 <strong>2025 年全新改造的报告厅</strong> 基础上建设，旨在为全校师生提供一站式智能网络服务，包括：</p>
+            <ul>
+                <li>在线课堂与教学辅导</li>
+                <li>教学资源共享</li>
+                <li>家校沟通</li>
+                <li>校园公告发布</li>
+                <li>设备预约与技术支持</li>
+            </ul>
+            <p>平台支持校园网与移动端多终端接入，结合智能推荐与数据分析，提升教学效率、丰富学习体验，并以严格的数据安全与隐私保护为基础，助力学校管理现代化。</p>
+            <h3>联系方式</h3>
+            <p>微信：anqingdeyun<br>
+               GitHub：<a href="https://github.com/ghtxx">https://github.com/ghtxx</a><br>
+               邮箱：lxj@ghtxx.cn
+            </p>
+            <img src="https://mail.aqde.net/images/2wm.jpg" class="qr" />
+        </div>
 
-      <p>除学习与教学外，我积极参与各类技术交流与社区活动，不断提升自己的技术能力与解决问题的思维方式。</p>
-
-      <p>本平台由我校在 <strong>2025 年</strong> 全新改造的报告厅基础上建设，旨在为全校师生提供一站式智能网络服务，包括：</p>
-
-      <ul>
-        <li>在线课堂与教学辅导</li>
-        <li>教学资源共享</li>
-        <li>家校沟通</li>
-        <li>校园公告发布</li>
-        <li>设备预约与技术支持</li>
-      </ul>
-
-      <p>平台支持校园网与移动端多终端接入，结合智能推荐与数据分析，提升教学效率、丰富学习体验，并以严格的数据安全与隐私保护为基础，助力学校管理现代化。</p>
-
-      <h4 id="联系方式">联系方式</h4>
-      <ul>
-        <li>微信：anqingdeyun</li>
-        <li>GitHub：<a href="https://github.com/ghtxx" target="_blank">https://github.com/ghtxx</a></li>
-        <li>个人主页：<a href="https://i.ghtxx.cn" target="_blank">https://i.ghtxx.cn</a></li>
-      </ul>
+        <footer>
+            © 2024 - 2025 高花亭小学 | 宇宙ICP备20250626号
+        </footer>
     </div>
-  </main>
-
-  <footer>
-    <div class="footer-text">
-      本站内容源自互联网，如有侵权请联系邮箱 <a href="mailto:lxj@ghtxx.cn">lxj@ghtxx.cn</a> 删除相关内容。<br/>
-      © 2024 - 2025 高花亭小学 | <a href="http://beian.miit.gov.cn/" rel="nofollow noopener" target="_blank">宇宙ICP备20250626号</a>
-    </div>
-  </footer>
-
-  <!-- 夜间模式按钮 -->
-  <div class="switch-dark-mode" id="switch-dark-mode" title="切换夜间模式">
-    <i class="fas fa-moon"></i>
-  </div>
-
-  <script>
-    // ==========================
-    // 自动夜间模式（北京时间18:00至次日06:00）
-    // ==========================
-    function autoNightMode() {
-      const now = new Date();
-      const utc8Hour = now.getUTCHours() + 8; // 转北京时间
-      const hour = utc8Hour >= 24 ? utc8Hour - 24 : utc8Hour;
-
-      if (hour >= 18 || hour < 6) {
-        document.body.classList.add('io-black-mode');
-      } else {
-        document.body.classList.remove('io-black-mode');
-      }
-    }
-
-    autoNightMode();
-    setInterval(autoNightMode, 60000); // 每分钟检查一次
-
-    // ==========================
-    // 手动切换夜间模式
-    // ==========================
-    document.getElementById("switch-dark-mode").addEventListener("click", () => {
-      document.body.classList.toggle("io-black-mode");
-    });
-  </script>
 </body>
 </html>
