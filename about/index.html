@@ -4,140 +4,165 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>高花亭小学网络学伴</title>
+
+    <!-- Google Fonts：更现代的界面字体 -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
     <style>
+        :root {
+            --bg-blur: rgba(255,255,255,0.55);
+            --card-bg: rgba(255,255,255,0.45);
+            --text-color: #222;
+            --link-color: #005eff;
+        }
+
+        body.dark {
+            --bg-blur: rgba(0,0,0,0.4);
+            --card-bg: rgba(20,20,20,0.5);
+            --text-color: #e8e8e8;
+            --link-color: #4da3ff;
+        }
+
         body {
             margin: 0;
-            font-family: "Helvetica", "Arial", sans-serif;
-            background: #f5f5f5;
-            color: #333;
+            font-family: "Inter", "Helvetica", "Arial", sans-serif;
+            color: var(--text-color);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: background 0.4s, color 0.4s;
         }
+
+        .bg {
+            position: fixed;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            z-index: -2;
+            filter: brightness(0.85);
+        }
+
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: var(--bg-blur);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            z-index: -1;
+        }
+
         .container {
             max-width: 900px;
             margin: auto;
-            padding: 20px;
+            padding: 25px;
         }
+
         header {
             text-align: center;
-            padding: 20px 0;
+            margin: 20px 0 35px;
         }
+
         header h1 {
             margin: 0;
-            font-size: 1.8rem;
-            font-weight: bold;
+            font-size: 2.1rem;
+            font-weight: 600;
+            letter-spacing: 1px;
         }
-        .login-box {
-            background: #fff;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            margin-top: 20px;
+
+        .card {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 18px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+            margin-bottom: 25px;
+            transition: background 0.4s;
+            animation: fadeUp 0.5s ease;
         }
-        .about {
-            background: #fff;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            margin-top: 20px;
-            line-height: 1.7;
+
+        @keyframes fadeUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
-        footer {
-            text-align: center;
-            padding: 20px;
-            font-size: 0.9rem;
-            color: #666;
+
+        ul {
+            padding-left: 20px;
         }
-        img.qr {
+
+        .qr {
             width: 180px;
             display: block;
-            margin: 15px auto;
+            margin: 20px auto;
+            border-radius: 12px;
         }
+
+        footer {
+            text-align: center;
+            padding: 25px 0;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
         a {
-            color: #0066cc;
+            color: var(--link-color);
             text-decoration: none;
+            font-weight: 500;
         }
-        a:hover { text-decoration: underline; }
-    </style>
-    <style>
-        body.dark {
-            background: #121212;
-            color: #e0e0e0;
-        }
-        body.dark .login-box,
-        body.dark .about {
-            background: #1e1e1e;
-            box-shadow: 0 4px 12px rgba(255,255,255,0.05);
-        }
-        .bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            opacity: 0.25;
-            z-index: -1;
-        }
+        a:hover { opacity: 0.75; }
+
         .theme-toggle {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            padding: 6px 12px;
-            background: #0078ff;
-            color: #fff;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 8px 15px;
+            border-radius: 10px;
             border: none;
-            border-radius: 6px;
+            background: rgba(255,255,255,0.65);
+            backdrop-filter: blur(6px);
             cursor: pointer;
+            font-size: 0.9rem;
+            transition: 0.3s;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
         }
         body.dark .theme-toggle {
-            background: #444;
+            background: rgba(30,30,30,0.65);
+            color: #eee;
+        }
+
+        .theme-toggle:hover {
+            transform: translateY(-2px);
         }
     </style>
-    <script>
-        const images = [
-            'https://picsum.photos/1200/2400?random=1',
-            'https://picsum.photos/1200/2400?random=2',
-            'https://picsum.photos/1200/2400?random=3'
-        ];
-        document.addEventListener('DOMContentLoaded', () => {
-            document.querySelector('.bg').style.backgroundImage = `url(${images[Math.floor(Math.random()*images.length)]})`;
-            const themeBtn = document.getElementById('themeToggle');
-            themeBtn.onclick = () => {
-                document.body.classList.toggle('dark');
-            };
-        });
-    </script>
 </head>
+
 <body>
     <div class="bg"></div>
+    <div class="overlay"></div>
+
     <button id="themeToggle" class="theme-toggle">切换主题</button>
+
     <div class="container">
         <header>
             <h1>高花亭小学网络学伴</h1>
         </header>
 
-        <div class="login-box">
-            <h2 style="font-size: 1.2rem; margin-top:0;">GHT E-mail</h2>
-            <script src="https://exmail.qq.com/zh_CN/htmledition/js_biz/outerlogin.js" charset="gb18030"></script>
+        <div class="card">
+            <h2 style="margin-top:0;">GHT E-mail 登录</h2>
+            <script src="https://exmail.qq.com/zh_CN/htmledition/js_biz/outerlogin.js"></script>
             <script>writeLoginPanel({domainlist:"ghtxx.cn", mode:"horizontal"});</script>
         </div>
 
-        <div class="about">
-            <h2 style="margin-top:0; font-size:1.2rem;">关于作者</h2>
-            <p>大家好，欢迎来到 <strong>高花亭小学网络学伴</strong>，我叫<strong>小花</strong>，能够熟练使用 MySQL、Oracle 等数据库管理系统。</p>
-            <p>在工作中，我注重团队协作，善于沟通合作，也注重代码的可读性与可维护性，致力于编写高质量的程序。对新技术充满热情，并能将所学知识融入实际工作。</p>
-            <p>除学习与教学外，我积极参与各类技术交流与社区活动，不断提升自己的技术能力与解决问题的思维方式。</p>
-            <p>本平台由我校在 <strong>2025 年全新改造的报告厅</strong> 基础上建设，旨在为全校师生提供一站式智能网络服务，包括：</p>
+        <div class="card">
+            <h2 style="margin-top:0;">关于作者</h2>
+            <p>大家好，我是 <strong>小花</strong>。熟练使用 MySQL、Oracle 等数据库，注重协作与代码质量，热爱新技术与教育结合。</p>
+            <p>本平台基于我校 <strong>2025 年焕新升级的报告厅</strong> 建设，旨在提供现代化教学支持，包括：</p>
             <ul>
                 <li>在线课堂与教学辅导</li>
                 <li>教学资源共享</li>
                 <li>设备预约与技术支持</li>
             </ul>
-            <p>平台支持校园网与移动端多终端接入，结合智能推荐与数据分析，提升教学效率、丰富学习体验，并以严格的数据安全与隐私保护为基础，助力学校管理现代化。</p>
             <h3>联系方式</h3>
             <p>微信：anqingdeyun<br>
                GitHub：<a href="https://github.com/ghtxx">https://github.com/ghtxx</a><br>
-               本站内容源自互联网，如有侵权请联系邮箱 lxj@ghtxx.cn 删除相关内容。
+               邮箱：lxj@ghtxx.cn（侵权请联系删除）
             </p>
             <img src="https://mail.aqde.net/images/2wm.jpg" class="qr" />
         </div>
@@ -146,5 +171,25 @@
             © 2024 - 2025 高花亭小学 | 宇宙ICP备20250626号
         </footer>
     </div>
+
+    <script>
+        // ➤ 加载 Bing 每日壁纸
+        fetch("https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1")
+            .then(r => r.json())
+            .then(data => {
+                const url = "https://www.bing.com" + data.images[0].url;
+                document.querySelector('.bg').style.backgroundImage = `url(${url})`;
+            });
+
+        // ➤ 自动主题（跟随系统）
+        if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+            document.body.classList.add("dark");
+        }
+
+        // ➤ 按钮切换主题
+        document.getElementById("themeToggle").onclick = () => {
+            document.body.classList.toggle("dark");
+        };
+    </script>
 </body>
 </html>
