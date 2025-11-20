@@ -10,15 +10,15 @@
 
     <style>
         :root {
-            --bg-blur: rgba(255,255,255,0.55);
-            --card-bg: rgba(255,255,255,0.45);
+            --bg-overlay: rgba(255,255,255,0.20);
+            --card-bg: rgba(255,255,255,0.55);
             --text-color: #222;
             --link-color: #005eff;
         }
 
         body.dark {
-            --bg-blur: rgba(0,0,0,0.4);
-            --card-bg: rgba(20,20,20,0.5);
+            --bg-overlay: rgba(0,0,0,0.28);
+            --card-bg: rgba(0,0,0,0.50);
             --text-color: #e8e8e8;
             --link-color: #4da3ff;
         }
@@ -27,45 +27,40 @@
             margin: 0;
             font-family: "Inter", "Helvetica", "Arial", sans-serif;
             color: var(--text-color);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
             transition: background 0.4s, color 0.4s;
         }
 
-.bg {
-    position: fixed;
-    inset: 0;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    z-index: -2;
-    filter: brightness(0.85);
-    opacity: 0;                 /* 初始透明 */
-    animation: bgFadeIn 1.6s ease-in-out forwards; /* 淡入动画 */
-}
+        /* 背景图由淡到深 */
+        .bg {
+            position: fixed;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            z-index: -2;
+            filter: brightness(0.95);
+            opacity: 0;
+            animation: bgFadeIn 1.8s ease-in-out forwards;
+        }
 
-/* 背景由淡到深 */
-@keyframes bgFadeIn {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
-}
+        @keyframes bgFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
 
-/* 移动端避免 fixed 问题 */
-@media (max-width: 768px) {
-    .bg {
-        background-attachment: scroll;
-    }
-}
+        /* 移动端避免背景抖动 */
+        @media (max-width: 768px) {
+            .bg {
+                background-attachment: scroll;
+            }
+        }
 
-
-
+        /* 透明轻遮罩（非模糊） */
         .overlay {
             position: fixed;
             inset: 0;
-            background: var(--bg-blur);
-            backdrop-filter: blur(18px);
-            -webkit-backdrop-filter: blur(18px);
+            background: var(--bg-overlay);
             z-index: -1;
         }
 
@@ -94,17 +89,9 @@
             box-shadow: 0 6px 18px rgba(0,0,0,0.18);
             margin-bottom: 25px;
             transition: background 0.4s;
-            animation: fadeUp 0.5s ease;
         }
 
-        @keyframes fadeUp {
-            from { transform: translateY(20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        ul {
-            padding-left: 20px;
-        }
+        ul { padding-left: 20px; }
 
         .qr {
             width: 180px;
@@ -135,7 +122,6 @@
             border-radius: 10px;
             border: none;
             background: rgba(255,255,255,0.65);
-            backdrop-filter: blur(6px);
             cursor: pointer;
             font-size: 0.9rem;
             transition: 0.3s;
@@ -145,10 +131,7 @@
             background: rgba(30,30,30,0.65);
             color: #eee;
         }
-
-        .theme-toggle:hover {
-            transform: translateY(-2px);
-        }
+        .theme-toggle:hover { transform: translateY(-2px); }
     </style>
 </head>
 
@@ -178,11 +161,13 @@
                 <li>教学资源共享</li>
                 <li>设备预约与技术支持</li>
             </ul>
+
             <h3>联系方式</h3>
             <p>微信：anqingdeyun<br>
                GitHub：<a href="https://github.com/ghtxx">https://github.com/ghtxx</a><br>
                邮箱：lxj@ghtxx.cn（侵权请联系删除）
             </p>
+
             <img src="https://mail.aqde.net/images/2wm.jpg" class="qr" />
         </div>
 
@@ -191,34 +176,36 @@
         </footer>
     </div>
 
-  <script>
-    // === 自动加载本地背景图：img/YYYYMM.jpg ===
-    const now = new Date();
-    const y = now.getFullYear();
-    const m = String(now.getMonth() + 1).padStart(2, '0');
-    const bgEl = document.querySelector('.bg');
+    <script>
+        // ========== 自动加载 年月背景图 ==========
 
-    const bgUrl = `img/${y}${m}.jpg`;
-    const fallbackUrl = 'img/default.jpg';
+        const now = new Date();
+        const y = now.getFullYear();
+        const m = String(now.getMonth() + 1).padStart(2, '0');
+        const bgUrl = `img/${y}${m}.jpg`;
+        const fallbackUrl = "img/default.jpg";
 
-    const img = new Image();
-    img.onload = () => {
-        bgEl.style.backgroundImage = `url(${bgUrl})`;
-    };
-    img.onerror = () => {
-        bgEl.style.backgroundImage = `url(${fallbackUrl})`;
-    };
-    img.src = bgUrl;
+        const bgEl = document.querySelector(".bg");
+        const testImg = new Image();
 
-    // === 自动跟随系统深色模式 ===
-    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-        document.body.classList.add("dark");
-    }
+        testImg.onload = () => {
+            bgEl.style.backgroundImage = `url(${bgUrl})`;
+        };
+        testImg.onerror = () => {
+            bgEl.style.backgroundImage = `url(${fallbackUrl})`;
+        };
+        testImg.src = bgUrl;
 
-    // === 点击切换主题 ===
-    document.getElementById("themeToggle").onclick = () => {
-        document.body.classList.toggle("dark");
-    };
-</script>
+        // ========== 跟随系统深色模式 ==========
+        if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+            document.body.classList.add("dark");
+        }
+
+        // ========== 手动切换深色模式 ==========
+        document.getElementById("themeToggle").onclick = () => {
+            document.body.classList.toggle("dark");
+        };
+    </script>
+
 </body>
 </html>
