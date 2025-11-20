@@ -32,14 +32,17 @@
             transition: background 0.4s, color 0.4s;
         }
 
-        .bg {
-            position: fixed;
-            inset: 0;
-            background-size: cover;
-            background-position: center;
-            z-index: -2;
-            filter: brightness(0.85);
-        }
+.bg {
+    position: fixed;
+    inset: 0;
+    background-size: cover;          /* 自动裁切，不变形 */
+    background-position: center;     /* 居中显示 */
+    background-repeat: no-repeat;    /* 不重复 */
+    background-attachment: fixed;    /* 桌面端固定背景 */
+    z-index: -2;
+    filter: brightness(0.85);
+}
+
 
         .overlay {
             position: fixed;
