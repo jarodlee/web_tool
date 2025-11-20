@@ -172,32 +172,34 @@
         </footer>
     </div>
 
-    <script>
-        // ★ 直接引用 Bing 今日图片（无需 fetch）
-        const now = new Date();
-        const y = now.getFullYear();
-        const m = String(now.getMonth() + 1).padStart(2, '0');
-        const bgEl = document.querySelector('.bg');
-        const now = new Date();
-        const y = now.getFullYear();
-        const m = String(now.getMonth() + 1).padStart(2, '0');
-        const bgUrl = `img/${y}${m}.jpg`;
-        const fallbackUrl = 'img/default.jpg';
+  <script>
+    // === 自动加载本地背景图：img/YYYYMM.jpg ===
+    const now = new Date();
+    const y = now.getFullYear();
+    const m = String(now.getMonth() + 1).padStart(2, '0');
+    const bgEl = document.querySelector('.bg');
 
-        const img = new Image();
-        img.onload = () => bgEl.style.backgroundImage = `url(${bgUrl})`;
-        img.onerror = () => bgEl.style.backgroundImage = `url(${fallbackUrl})`;
-        img.src = bgUrl;('.bg').style.backgroundImage = `url(img/${y}${m}.jpg)`;
+    const bgUrl = `img/${y}${m}.jpg`;
+    const fallbackUrl = 'img/default.jpg';
 
-        // 自动主题（跟随系统）
-        if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-            document.body.classList.add("dark");
-        }
+    const img = new Image();
+    img.onload = () => {
+        bgEl.style.backgroundImage = `url(${bgUrl})`;
+    };
+    img.onerror = () => {
+        bgEl.style.backgroundImage = `url(${fallbackUrl})`;
+    };
+    img.src = bgUrl;
 
-        // 按钮切换主题
-        document.getElementById("themeToggle").onclick = () => {
-            document.body.classList.toggle("dark");
-        };
-    </script>
+    // === 自动跟随系统深色模式 ===
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        document.body.classList.add("dark");
+    }
+
+    // === 点击切换主题 ===
+    document.getElementById("themeToggle").onclick = () => {
+        document.body.classList.toggle("dark");
+    };
+</script>
 </body>
 </html>
