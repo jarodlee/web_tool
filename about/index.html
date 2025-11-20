@@ -35,13 +35,29 @@
 .bg {
     position: fixed;
     inset: 0;
-    background-size: cover;          /* 自动裁切，不变形 */
-    background-position: center;     /* 居中显示 */
-    background-repeat: no-repeat;    /* 不重复 */
-    background-attachment: fixed;    /* 桌面端固定背景 */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     z-index: -2;
     filter: brightness(0.85);
+    opacity: 0;                 /* 初始透明 */
+    animation: bgFadeIn 1.6s ease-in-out forwards; /* 淡入动画 */
 }
+
+/* 背景由淡到深 */
+@keyframes bgFadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+/* 移动端避免 fixed 问题 */
+@media (max-width: 768px) {
+    .bg {
+        background-attachment: scroll;
+    }
+}
+
 
 
         .overlay {
