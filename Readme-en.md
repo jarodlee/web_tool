@@ -2,12 +2,12 @@
 
 ## Deployment steps
 
-Copy all files to the server, the entry file is index.html
+使用传统的html制作教学工具类导航丫
 
 
 ## Preview
 
-https://geeeeeeeek.github.io/web_tool/
+https://ghtxx.cn
 
 
 ## Secondary development
@@ -19,12 +19,12 @@ If you want to modify the about page, you can modify the index page in about fol
 
 ## Reference
 
-- https://web-tool-omega.vercel.app/
+- https://ghtxx.cn/
 
-- https://web-a55.pages.dev/
+- https://i.ghtxx.cn/
 
-- https://web.gitapp.cn
+- https://lxj.ai
 
-- https://fktool.com
+- https://aqde.net
 
 Have a nice day!
