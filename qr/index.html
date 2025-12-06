@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>高花亭小学二维码展示</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: url('../wallpaper.jpg') no-repeat center center/cover;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            max-width: 90%;
+        }
+        .qr-code {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease-in-out;
+            cursor: pointer;
+        }
+        .qr-code:nth-child(1) { background-color: #FFCCCC; }
+        .qr-code:nth-child(2) { background-color: #CCFFCC; }
+        .qr-code:nth-child(3) { background-color: #CCCCFF; }
+        .qr-code:nth-child(4) { background-color: #FFFF99; }
+        .qr-code:nth-child(5) { background-color: #FF99FF; }
+        .qr-code:nth-child(6) { background-color: #99FFFF; }
+        .qr-code img {
+            width: 150px;
+            height: 150px;
+            transition: transform 0.3s ease-in-out;
+        }
+        .fullscreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .fullscreen img {
+            width: 80vw;
+            height: 80vh;
+        }
+    </style>
+    <script>
+        function toggleFullscreen(element) {
+            if (element.classList.contains('fullscreen')) {
+                element.classList.remove('fullscreen');
+            } else {
+                document.querySelectorAll('.qr-code').forEach(qr => qr.classList.remove('fullscreen'));
+                element.classList.add('fullscreen');
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="qr-code" onclick="toggleFullscreen(this)"><img src="qr1.png" alt="高花亭小学信息化·设备统计"></div>
+        <div class="qr-code" onclick="toggleFullscreen(this)"><img src="qr2.png" alt="物品发放登记表"></div>
+        <div class="qr-code" onclick="toggleFullscreen(this)"><img src="qr3.png" alt="物资需求申请表"></div>
+        <div class="qr-code" onclick="toggleFullscreen(this)"><img src="qr4.png" alt="二维码4"></div>
+        <div class="qr-code" onclick="toggleFullscreen(this)"><img src="qr5.png" alt="二维码5"></div>
+        <div class="qr-code" onclick="toggleFullscreen(this)"><img src="qr6.png" alt="二维码6"></div>
+    </div>
+</body>
+</html>
