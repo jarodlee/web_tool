@@ -1,10 +1,15 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>高花亭小学二维码展示</title>
+
     <style>
+        :root {
+            --bg-image: url('/about/img/default.jpg');
+        }
+
         body {
             margin: 0;
             padding: 0;
@@ -12,57 +17,119 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background: url('../wallpaper.jpg') no-repeat center center/cover;
+            background: var(--bg-image) no-repeat center center / cover;
+            opacity: 0;
+            animation: fadeInBg 1.8s ease forwards;
         }
+
+        @keyframes fadeInBg {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
         .container {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 20px;
             padding: 30px;
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 18px;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
             max-width: 90%;
+            backdrop-filter: blur(10px);
         }
+
+        /* 手机端 — 单列布局 */
+        @media (max-width: 600px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+
         .qr-code {
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 15px;
-            border-radius: 10px;
+            border-radius: 12px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s ease-in-out;
             cursor: pointer;
         }
-        .qr-code:nth-child(1) { background-color: #FFCCCC; }
-        .qr-code:nth-child(2) { background-color: #CCFFCC; }
-        .qr-code:nth-child(3) { background-color: #CCCCFF; }
-        .qr-code:nth-child(4) { background-color: #FFFF99; }
-        .qr-code:nth-child(5) { background-color: #FF99FF; }
-        .qr-code:nth-child(6) { background-color: #99FFFF; }
+
+        .qr-code:nth-child(1) { background-color: #ffe0e0; }
+        .qr-code:nth-child(2) { background-color: #e0ffe0; }
+        .qr-code:nth-child(3) { background-color: #e0e0ff; }
+        .qr-code:nth-child(4) { background-color: #fff8c2; }
+        .qr-code:nth-child(5) { background-color: #ffd6ff; }
+        .qr-code:nth-child(6) { background-color: #c9ffff; }
+
         .qr-code img {
             width: 150px;
             height: 150px;
             transition: transform 0.3s ease-in-out;
         }
+
+        .qr-code:hover img {
+            transform: scale(1.08);
+        }
+
+        /* 全屏查看动画 */
         .fullscreen {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.85);
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 1000;
+            padding: 20px;
+            animation: zoomIn 0.25s ease-out;
         }
+
+        @keyframes zoomIn {
+            from { transform: scale(0.6); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
         .fullscreen img {
-            width: 80vw;
-            height: 80vh;
+            width: 85vw;
+            height: auto;
+            max-height: 90vh;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
     </style>
+
     <script>
+        // --- 自动选择背景图片（当前年月） ---
+        function autoSetBackground() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const fileName = `${year}${month}.jpg`;
+            const basePath = '/about/img/';
+            const imgPath = basePath + fileName;
+            const defaultPath = basePath + 'default.jpg';
+
+            const testImg = new Image();
+            testImg.onload = () => {
+                document.documentElement.style.setProperty('--bg-image', `url('${imgPath}')`);
+            };
+            testImg.onerror = () => {
+                document.documentElement.style.setProperty('--bg-image', `url('${defaultPath}')`);
+            };
+            testImg.src = imgPath;
+        }
+
+        // --- 点击放大全屏 ---
         function toggleFullscreen(element) {
             if (element.classList.contains('fullscreen')) {
                 element.classList.remove('fullscreen');
@@ -71,8 +138,11 @@
                 element.classList.add('fullscreen');
             }
         }
+
+        window.onload = autoSetBackground;
     </script>
 </head>
+
 <body>
     <div class="container">
         <div class="qr-code" onclick="toggleFullscreen(this)"><img src="qr1.png" alt="高花亭小学信息化·设备统计"></div>
